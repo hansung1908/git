@@ -116,16 +116,18 @@ git pull origin main
 git clone 깃헙 프로젝트 주소
 ```
 
-### 깃헙에 push한 commit 변경
-- 깃헙에 노출되면 안되는 중요한 파일을 같이 올렸을 경우 해당 명령어 사용
-```shell
-# 파일명은 폴더가 아닌 특정 확장자를 가진 파일명을 입력 (ex. /config/importantConfig.yml)
-# 현재 진행사항도 삭제되므로 중요 파일은 따로 저장
-# 변경할 커밋 수가 많거나 변경할 파일 용량이 크면 변경되는데 시간이 걸릴 수도 있음
-git filter-branch --force --index-filter 'git rm --cached --ignore-unmatch 파일명' --prune-empty --tag-name-filter cat -- --all
-
-# 중간 과정으로 gitignore을 사용해 해당 중요 파일을 커밋 대상에서 제외
-
-# 깃헙에 저장된 내용과 달라지므로 강제 push
-git push origin master --force
+### 커밋 티켓팅
+- 커밋 메세지에 이슈 번호를 명시
+```text
+git commit -m "커밋 메세지입니다. #1"
 ```
+
+- 이슈 번호를 통해
+  - 커밋 메세지 요약내용, 실제 자세한 내용은 이슈를 통해 확인
+  - 이슈에 포함된 사람들을 확인 가능 (리뷰어까지)
+  - 이슈를 해결하며 논의 했던 내용들을 확인 가능
+
+##### 워크 플로우
+- 특정 프로젝트에 대해 일을 부여받음 (새 기능 개발, 버그 픽스 등)
+- -> GitHub나 사내 GitLab의 이슈 기능에 새로운 Issue(티켓) 생성
+- -> 해당 프로젝트에 관련된 커밋 작성시 번호 기재
