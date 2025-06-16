@@ -131,3 +131,45 @@ git commit -m "커밋 메세지입니다. #1"
 - 특정 프로젝트에 대해 일을 부여받음 (새 기능 개발, 버그 픽스 등)
 - -> GitHub나 사내 GitLab의 이슈 기능에 새로운 Issue(티켓) 생성
 - -> 해당 프로젝트에 관련된 커밋 작성시 번호 기재
+
+### git stash
+
+- 작업 중인 변경 사항을 임시로 저장하고, 작업 디렉토리를 깨끗한 상태로 되돌릴 수 있는 Git 명령어입니다.
+- 다른 브랜치로 전환하거나, 작업을 잠시 멈추고 다른 작업을 해야 할 때 유용하게 사용됩니다.
+
+##### 주요 명령어
+
+```bash
+# stash 저장:
+git stash
+
+# 또는 메시지를 남길 경우:
+git stash save "메시지"
+
+# stash 목록 확인:
+git stash list
+
+# stash 적용:
+
+# 최근 stash 적용:
+git stash apply
+
+# 특정 stash 적용:
+git stash apply stash@{번호}
+
+# stash 적용 후 삭제:
+git stash pop
+
+# stash 삭제:
+git stash drop stash@{번호}
+
+# 모든 stash 삭제:
+git stash clear
+```
+
+특징 및 주의사항
+
+- 스택 구조: 여러 번 stash할 수 있고, 가장 최근에 넣은 stash가 먼저 꺼내집니다.
+- 추적되지 않은 파일(untracked): 기본적으로 stash에 포함되지 않지만, -u 옵션을 추가하면 함께 저장할 수 있습니다.
+- 브랜치에 종속되지 않음: stash는 브랜치에 종속되지 않으므로, 다른 브랜치에서도 복원할 수 있습니다(충돌 주의).
+- 스태시 후 추가 작업: stash 후 추가 작업을 하고 stash를 적용하면, stash에 저장된 내용이 현재 작업 트리에 덧씌워집니다. 충돌이 발생할 수 있으니, 충돌이 있다면 직접 해결(수동 머지)해야 하며, 자동으로 깔끔하게 merge되지 않습니다.
